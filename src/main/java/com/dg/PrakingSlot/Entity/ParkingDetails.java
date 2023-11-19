@@ -8,7 +8,7 @@ public class ParkingDetails {
 
     private String block;
 
-    private boolean avalability;
+    private boolean availability;
 
 
     public ParkingDetails() {
@@ -19,7 +19,7 @@ public class ParkingDetails {
         return "ParkingDetails{" +
                 "slot=" + slot +
                 ", block='" + block + '\'' +
-                ", avalability=" + avalability +
+                ", availability=" + availability +
                 '}';
     }
 
@@ -39,17 +39,17 @@ public class ParkingDetails {
         this.block = block;
     }
 
-    public boolean getAvalability() {
-        return avalability;
+    public boolean getAvailability() {
+        return availability;
     }
 
     public void setAvalability(boolean avalability) {
-        this.avalability = avalability;
+        this.availability = avalability;
     }
 
     public ParkingDetails(Integer slot, String block, boolean avalability) {
         this.slot = slot;
         this.block = block;
-        this.avalability = avalability;
+        this.availability = avalability;
     }
 }

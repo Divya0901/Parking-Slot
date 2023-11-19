@@ -26,7 +26,7 @@ public class UserDetailsRepository {
         return null;
     }
 
-    public Integer findUserByCateogryOfVehicle(String vehicleType) {
+    public Integer findUserByCategoryOfVehicle(String vehicleType) {
         int count = 0;
         for(UserDetails userDetails: userDetailsList) {
             if(userDetails.getCateogryOfVehicle().toString().equalsIgnoreCase(vehicleType)) {

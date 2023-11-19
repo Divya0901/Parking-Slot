@@ -1,5 +1,6 @@
 package com.dg.PrakingSlot.Service;
 
+import com.dg.PrakingSlot.Controller.UserController;
 import com.dg.PrakingSlot.DTO.AvalabilityDto;
 import com.dg.PrakingSlot.DTO.SlotBlockResponse;
 import com.dg.PrakingSlot.Entity.BlockDetails;
@@ -9,6 +10,8 @@ import com.dg.PrakingSlot.Entity.UserParkingDetails;
 import com.dg.PrakingSlot.Repository.ParkingDetailsRepository;
 import com.dg.PrakingSlot.Repository.UserDetailsRepository;
 import com.dg.PrakingSlot.Repository.UserParkingDetailsRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.info.JavaInfo;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,7 @@ import java.util.List;
 @Service
 public class UserDetailsService {
 
+    public static final Logger logger = LoggerFactory.getLogger(UserController.class);
     @Autowired
     UserDetailsRepository userDetailsRepository;
 
@@ -35,19 +39,19 @@ public class UserDetailsService {
     public SlotBlockResponse saveUserEntryDetails(UserDetails userDetails) {
         userDetailsRepository.saveUserDetails(userDetails);
 
-        ParkingDetails parkingDetails = parkingDetailsService.getAvalaibilityBySlot(1);
-        if(!parkingDetails.getAvalability()) {
+        ParkingDetails parkingDetails = parkingDetailsService.getAvailabilityBySlot(1);
+        if(!parkingDetails.getAvailability()) {
 
             if("SUPERBIKE".equalsIgnoreCase(userDetails.getCateogryOfVehicle().toString())) {
-                parkingDetails = parkingDetailsService.getAvalaibilityBySlot(2);
+                parkingDetails = parkingDetailsService.getAvailabilityBySlot(2);
 
-                if(!parkingDetails.getAvalability())
+                if(!parkingDetails.getAvailability())
                     return null;
 
             } else if ("SCOOTER".equalsIgnoreCase(userDetails.getCateogryOfVehicle().toString())) {
-                parkingDetails = parkingDetailsService.getAvalaibilityBySlot(3);
+                parkingDetails = parkingDetailsService.getAvailabilityBySlot(3);
 
-                if(!parkingDetails.getAvalability())
+                if(!parkingDetails.getAvailability())
                     return null;
             }
 
@@ -69,7 +73,7 @@ public class UserDetailsService {
 
         userParkingDetailsRepository.saveUserParkingDetails(userParkingDetails);
 
-        parkingDetailsService.updateAvaliblity(parkingDetails);
+        parkingDetailsService.updateAvailability(parkingDetails);
 
         return  new SlotBlockResponse(userDetails.getVehicleId(), parkingDetails.getSlot(), parkingDetails.getBlock());
     }
